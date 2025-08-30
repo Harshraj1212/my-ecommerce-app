@@ -1,15 +1,15 @@
 import mysql from "mysql2";
 import dotenv from "dotenv";
 
-dotenv.config(); // load env variables
+dotenv.config();
 
-let pool = mysql.createPool({
-  connectionLimit: 100,
-  host: process.env.MYSQL_HOST,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
- port: process.env.MYSQL_PORT
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: process.env.DB_HOST,      // Railway MySQL host
+  user: process.env.DB_USER,      // Railway MySQL user
+  password: process.env.DB_PASSWORD,  // Railway MySQL password
+  database: process.env.DB_NAME,  // Railway MySQL database
+  port: process.env.DB_PORT || 3306
 });
 
 export default pool;
