@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("_externalLink.ejs")%>
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap');
+</style>
+
+<body>
+
+    <!-- Start Top Nav -->
+    <%- include("_navbar.ejs")%>
+        <div class="container-fluid abc">
+            <div class="container-fluid box001">
+                <div class="container-fluid box001-content" id="box001-content">
+                    <div class="container-fluid outer1">
+                        <!-- <div class="row head">
+                            <h1>My Orders</h1>
+                        </div> -->
+                        <div class="row heading" style="text-align: center;">
+                            <div class="col-1">S.No</div>
+                            <div class="col-2">Order Id</div>
+                            <div class="col-1">Date</div>
+                            <div class="col-4">Ship To</div>
+                            <div class="col-1">Total</div>
+                            <div class="col-1">Status</div>
+                            <div class="col-2">Action</div>
+                        </div>
+                        <div class="container-fluid values p-0" style="text-align: center; color: black; text-decoration: none;  overflow-x: hidden;" id="values">
+                            <%orders.map((order,index)=>{%>
+                            <div class="row headingValue">
+                                <div class="col-1"><%=index+1%></div>
+                                <div class="col-2 orderId" ><%=order.id%></div>
+                                <div class="col-1"><%=order.date%></div>
+                                <div class="col-4"><%=order.deliveryAddress%></div>
+                                <div class="col-1 "><span>&#8377</span><%=order.billAmount%></div>
+                                <div class="col-1 money" ><%=order.status%></div>
+                                <div class="col-2 orderbtn" ><a onclick="funTurn('<%=order.id%>')" style="font-size: 15px !important; font-weight: 400;"> View Order</a></div>
+                            </div>
+                            <%})%>
+                        </div>
+                    </div>
+                    <div class="container-fluid outer2">
+                        <div class="row head">
+                            <a id="orderBtn" onclick="funReturn()"><i class="fas fa-shopping-bag"></i></a>
+                            <h1>Order Items</h1>
+                        </div>
+                        <div class="row row2 heading2 text-center" style="font-size: 17px; color: black; font-weight: 450;">
+                            <div class="col-1 a">S.No</div>
+                            <div class="col-2 a">Product</div>
+                            <div class="col-2 a">brand</div>
+                            <div class="col-2 a">Price</div>
+                            <div class="col-2 a">Discount</div>
+                            <div class="col-1 a">Quantity</div>
+                            <div class="col-2 a">Total</div>
+                        </div>
+                        <div class="container-fluid overflow" id="overflow">
+                            <!--<div class="col-1 a">S.No</div>
+                                 <div class="row row3">
+                                <div class="col-2 a">
+                                    <div class="product">
+                                        <img class="img" id="img" src="sndksancsajnd" alt="">
+                                        <h6 class="title" id="title">appale</h6>
+                                    </div>
+                                </div>
+                                <div class="col-2 a">brand</div>
+                                <div class="col-2 a" id="price">1099</div>
+                                <div class="col-2 a" id="discount"><span>22%</span><span>%Off</span></div>
+                                <div class="col-1 a" id="quantity"> 2</div>
+                                <div class="col-2 a" id="total">90000 </div>
+                            </div>  -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <Script>
+
+            function getOrderItems(orderDetailsId){
+                var xhttp = new XMLHttpRequest(); 
+                xhttp.open("GET","/order/orderItems/"+orderDetailsId,true);
+                xhttp.send();
+                xhttp.onreadystatechange = function(){
+                if(xhttp.readyState == 4){
+                   let items="";
+                   let data = JSON.parse(xhttp.responseText);
+                   data.map((item,index)=>{
+                    let discount=  Math.trunc(item.discountPercentage);
+                    let total = (item.price - Math.trunc((item.price * discount)/100))* item.productQty;
+                     items += '<div class="row row3"><div class="col-1 a">'+(index+1)+'</div> <div class="col-2 a"> <div class="product"> <img class="img" id="img" src='+item.thumbnail+' alt=""> <h6 class="title" id="title">'+item.title+'</h6> </div> </div><div class="col-2 a">'+item.brand+'</div> <div class="col-2 a" id="price"><span>&#8377</span>'+item.price+'</div> <div class="col-2 a" id="discount"><span>'+item.discountPercentage+'</span><span>%Off</span></div> <div class="col-1 a" id="quantity"> '+item.productQty+' </div><div class="col-2 a" id="total"><span>&#8377</span>'+total+'</div></div>'
+                   });
+                        
+                   document.getElementById("overflow").innerHTML=items;
+                }
+              }
+            }
+
+
+            function funTurn(id) {
+                getOrderItems(id);
+                var ele = document.getElementById('box001-content');
+                ele.style.transform = "rotateY(180deg)";
+              
+            }
+
+            function funReturn() {
+                let element = document.getElementById('box001-content');
+                element.style.transform = "rotateY(0deg)";
+            }
+
+
+
+        </Script>
+
+
+        <%- include("_footer.ejs")%>
+
+            <%- include("_externalScripts.ejs")%>
+
+
+
+</body>
+
+</html>

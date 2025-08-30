@@ -1,0 +1,394 @@
+
+.mycard{
+    background-color: white;
+    box-shadow: 4px 4px 5px rgb(39, 39, 39);
+    /* padding: 10px 20px; */
+}
+.content{
+    padding: 10px 20px;
+}
+
+  
+  .box {
+    transition: transform, box-shadow 1s, 1s;
+    /* transition: box-shadow 1s; */
+    box-shadow: 2px 2px 3px 1px #282827c0;
+  }
+  
+  .box:hover {
+    transform: scale(1.1);
+    box-shadow: 3px 3px 30px 1px #3e3e3dc0;
+    /* transform :rotateY(-180deg);	 */
+  }
+  
+  .box-content {
+    width: 100%;
+    height: 30vh;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    /* border: 2px solid red; */
+  }
+  
+  #cardimg:hover {
+    box-shadow: 3px 3px 5px;
+  }
+  
+  .box-back,
+  .box-front {
+    width: 100%;
+    height: 45vh;
+    position: absolute;
+    backface-visibility: hidden;
+    height: auto;
+  }
+  
+  .box-front {
+    text-align: center;
+  }
+  
+  .box-back {
+    padding: 15% 15% 10% 15%;
+    color: black;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    transform: rotateY(180deg);
+  
+  }
+  
+  .rotate:hover .box-content {
+    transform: rotateY(180deg);
+  }
+  
+  .card-body {
+    /* border: 2px solid green; */
+    padding: 3% 7% 7% 7%;
+  }
+  
+  .card-title {
+    font-size: 14px;
+  }
+  
+  .box {
+    border-style: none;
+    position: relative;
+  }
+  
+  .box:hover .cross {
+    display: inline;
+  }
+  
+  .cross {
+    position: absolute !important;
+    margin-left: 82.5% !important;
+    margin-top: -3.5% !important; 
+    display: none;
+   
+  
+  }
+  
+  .bt2 {
+    margin-left: 20px !important;
+    border-style: none;
+    border-radius: 50% !important;
+    color: #18181a ;
+    background-color: #fff;
+    font-size: 15px !important;
+    padding: 0px 0px !important;
+    width: 22px !important;
+    height: 22px !important;
+    box-shadow: 1px 1px 1px;
+  }
+  
+  /* .................................................... */
+  
+  /* <!-- HTML !--> */
+  /* <button class="button-57" role="button"><span class="text">Button 57</span><span>Alternate text</span></button> */
+  
+  /* CSS */
+  .button-57 {
+    position: relative;
+    overflow: hidden;
+    /* border: 1px solid #18181a; */
+    border-style: none;
+    color: #fff;
+    /* color: #18181a; */
+    display: inline-block;
+    font-size: 12px;
+    width: 100%;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 8px 8px 8px;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    background: #1aa694;
+    /* background: rgb(253, 220, 5); */
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    outline: none !important;
+    
+  }
+  
+  .button-57 span:first-child {
+    position: relative;
+    transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+    z-index: 10;
+  }
+  
+  .button-57 span:last-child {
+    color: white;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
+    z-index: 100;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translateY(225%) translateX(-50%);
+    height: 14px;
+    line-height: 25px;
+  }
+  
+  .button-57:after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transform-origin: bottom center;
+    transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+    transform: skewY(9.3deg) scaleY(0);
+    z-index: 50;
+  }
+  
+  .button-57:hover:after {
+    transform-origin: bottom center;
+    transform: skewY(9.3deg) scaleY(2);
+  }
+  
+  .button-57:hover span:last-child {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 1;
+    transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
+  
+  }
+    /* .............................heading................................ */
+  
+  /* .head2 {
+    background-color: #fff;
+    padding-top: 1%;
+    z-index: 3;
+    height: 14vh;
+  
+    text-align: left;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.228);
+  } */
+  
+  /* #logo {
+    height: 8vh;
+    margin-left: 8%;
+    text-decoration: none;
+    justify-content: center;
+  }
+  
+  #logo:hover {
+    box-shadow: 0px 0px 0px;
+  }
+  
+  #searchbar {
+    margin-top: 6px;
+    width: 40%;
+    margin-left: 3%;
+    height: 7.5vh;
+    border-radius: 8px;
+    background-color: #f6f6f4;
+    padding: 0px 40px 0px 30px;
+    font-size: 14px;
+    font-family: Montserrat, sans-serif;
+    font-stretch: expanded;
+    border-style: none;
+  }
+  
+  #searchbar:focus {
+    outline: none;
+  }
+  
+  #searchIcon {
+    position: absolute;
+    font-size: 20px;
+    font-weight: 380;
+    margin-top: 18px;
+    margin-left: -35px;
+    cursor: pointer;
+  }
+   */
+  /* .logBtn {
+    margin-left: 10px;
+    width: 9%;
+    background-color: #42c8b7;
+    cursor: pointer;
+    border-style: none;
+  }
+  
+  .logBtn:hover {
+    background-color: #38a697;
+  } */
+  
+  /* .order-track {
+    text-decoration: none;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    color: black;
+    margin-left: 1%;
+    font-weight: 450;
+    box-shadow: none;
+  
+  }
+   */
+  /* #cartbtn {
+    text-decoration: none;
+
+    color: black;
+    margin-left: 1%;
+    font-size: 14px;
+    font-weight: 450;
+  } */
+  .rounded-circle{
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    padding: 0px;
+    font-size: 12px;
+    margin-top: 7px;
+    margin-left: -39px;
+    display: none;
+  }
+  .no:hover {
+    box-shadow: 0px 0px 0px;
+  }
+  
+  .ratings{
+    margin-bottom: 0px;
+  }
+  
+  /* .slider {
+    width: 80%;
+    height: 45vh;
+    border-radius: 13px;
+    overflow: hidden;
+    
+    padding: 0px;
+    margin-top: 2%;
+  } */
+  
+  /* .offerHead {
+    color: #000;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-top: 4%;
+    margin-left: 8.5%;
+    padding-bottom: 4px;
+  } */
+  /* /////////////////////////////////searchbar////////////////////////////////////////// */
+
+  
+.search { 
+
+  margin: 0px 20px 7px 20px;
+}
+
+
+.search > h3 {
+  font-weight: normal;
+}
+
+.search > h1,
+.search > h3 {
+  color: white;
+  margin-bottom: 15px;
+  /* text-shadow: 0 1px #0091c2; */
+}
+
+.search > div {
+  display: inline-block;
+  position: relative;
+  /* filter: drop-shadow(0 1px #0091c2); */
+}
+
+.search > div:after {
+  content: "";
+  background:#212529;
+  width: 1.5px;
+  height: 10px;
+  position: absolute;
+  top: 20px;
+  right: 0.5px;
+  transform: rotate(135deg);
+}
+
+.search > div > input {
+  /* margin-top: -5px; */
+  color: #212529;
+  font-size: 15px;
+  font-weight: 400;
+  background: transparent;
+  width: 8px;
+  height: 8px;
+  padding: 10px;
+  border: solid 1.5px #212529;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.search > div > input::placeholder {
+  color: #212529;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.search > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search > div > input:focus,
+.search > div > input:not(:placeholder-shown) {
+  width: 150px;
+  padding: 10px 30px 10px 10px;
+}
+input:focus + #closebtn{
+color: red;
+}
+
+.searchWala{
+  /* border:1px solid #212529; */
+  text-align: right;
+  width: 200px;
+}
+.closeIcon{
+  z-index: 10;
+  font-size: 15px;
+  margin-top: -28px;
+  margin-left: 160px;
+  position: absolute;
+ 
+
+}
+#closebtn{
+  cursor:pointer;
+  font-size: 18px;
+
+
+}
+#closeDiv :hover{
+  color: red;
+}
+#closeDiv{
+  visibility: hidden;
+  color: darkgoldenrod;
+}

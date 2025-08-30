@@ -1,0 +1,214 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+    <div class="container text-light">
+        <div class="w-100 d-flex justify-content-between">
+            <div>
+                <i class="fa fa-envelope mx-2"></i>
+                <a class="navbar-sm-brand text-light text-decoration-none"
+                    href="mailto:info@company.com">info@foundation.com</a>
+                <i class="fa fa-phone mx-2"></i>
+                <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+            </div>
+            <div>
+                <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
+                        class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
+                        class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://twitter.com/" target="_blank"><i
+                        class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i
+                        class="fab fa-linkedin fa-sm fa-fw"></i></a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Close Top Nav -->
+
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light shadow">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <a class="navbar-brand logo h1 align-self-center" href="/" style="color:#22c1c3">
+            Info-Shop
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+            id="templatemo_main_nav">
+            <div class="flex-fill">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/product/products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/orders">My Orders</a>
+                       
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar align-self-center d-flex">
+                <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                        <div class="input-group-text">
+                            <i class="fa fa-fw fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="searchWala">
+                <div class="flexbox">
+                    <div class="search">
+                      <div >
+                        <input type="text"  onblur="onblurfun(this.value)" onkeyup="searching(this.value)" placeholder="Search . . ." required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="closeIcon" id="closeDiv"><i class="fa fa-times" onclick="fnc()" id="closebtn"></i></div>
+                </div>
+                <%if(currentUser.userId){%>
+                    <a class="nav-icon position-relative text-decoration-none"
+                        href="/cart/goToCart/<%= currentUser.userId %>">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        
+                        <span id="totalcart" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+                    </a>
+                    
+                    <!-- ........................................... -->
+                    <div class="dropdown">
+                       <a class="nav-icon position-relative text-decoration-none " data-bs-toggle="dropdown" aria-expanded="false" >
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span class="fs-6 email"><%= currentUser.username%></span>  
+                    </a>
+                       <ul class="dropdown-menu fs-6">
+                         <li><a class="dropdown-item fs-6" href="/signout">Sign Out</a></li>
+                       </ul>
+                     </div>
+
+                    <%}else{%>
+                        <a class="nav-icon position-relative text-decoration-none" href="/signin">
+                            <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                            <span id="totalcart" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">0</span>
+                        </a>
+                        <a class="nav-icon position-relative text-decoration-none" href="/signin">
+                            <span>Sign In</span>
+                        </a>
+                        <%}%>
+                            
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<div id="searchResult">
+<script>
+  function onblurfun(value){
+    let close = document.getElementById('closebtn');
+    if(!value.length){
+    close.style.visibility="hidden";
+    }
+ }
+  function fnc(){
+    location.reload();  
+  }
+
+
+  function searching(input){
+    var xhttp = new XMLHttpRequest(); 
+    xhttp.open("GET","/searching/"+input,true);
+    xhttp.send();
+    xhttp.onreadystatechange = function(){
+        let close = document.getElementById('closebtn');
+    close.style.visibility="visible";
+        if(xhttp.readyState == 4){
+        let html = '<div class="container py-5"> <div class="row justify-content-between px-3">';
+        let data = JSON.parse(xhttp.responseText);
+           data.map((item,index)=>{
+//____________________________________________________________________________
+                                        if(item.rating){
+                                          var stars = item.rating*1 / 1
+                                        }
+                                         if(item.rating%1 >= 0.5){
+                                            var halfstar = 1;
+                                         }
+ html += '<div id="'+item.id+'" class="col-3 card mb-5 mx-2 px-0 py-0 box" style="width: 14rem;"><div class="rotate"><div class="box-content bts1"><div class="box-front"><img id="cardimg" src="'+item.thumbnail+'"class="card-img-top imgzoom" style="height:30vh" alt="..."></div> <div class="box-back"> <p>'+ item.description.substring(0,45)+'</p> <a href="/viewmore/'+item.id+'" >View More</a> </div> </div> </div> <div class="card-body"> <ul class="list-unstyled d-flex justify-content-between ratings"><li> <i class="text-warning fa fa-star"></i><i class="text-warning fa fa-star"></i><i class="text-warning fa fa-star"></i><i class="text-warning fa fa-star"></i><i class="text-warning fa fa-star-half"></i></li><li class="text-muted text-right">'+item.rating+'</li></ul><h6 class="card-title">'+item.title+'</h6><p class="card-text">'+'₹'+item.price+'</p><a id="a'+item.id+'"><button class="button-57" id="button-57'+item.id+'" role="button"><span id="spanFirst'+item.id+'" class="text"><i class="fas fa-shopping-cart"></i> ADD TO CART</span><span id="spanLast'+item.id+'"><i class="fas fa-shopping-cart"></i> CART</span></button></a>        </div> <div class="cross"><a onclick="myFunction("'+ item.id +'") class="btn btn-danger bt2">✘</a></div> </div>'
+//____________________________________________________________________________
+
+});
+html+='</div></div>';
+document.getElementById('searchResult').innerHTML= html;
+// data.map((i,index)=>{
+//     document.getElementById('a'+i.id).onclick = addToCarts('<%=currentUser.userId%>',i.id);
+    
+
+// })
+}
+}
+if('<%=currentUser.userId%>'){
+            addToCarts('<%=currentUser.userId%>');
+          }
+         
+
+}
+
+
+  /////////////////////////////////////////////////////////////////////////
+  if('<%=currentUser.userId%>'){
+            addToCarts('<%=currentUser.userId%>');
+          }
+
+            function addToCarts(userId,productId){
+              var xhttp = new XMLHttpRequest(); 
+              if(productId)
+                xhttp.open("GET","/cart/addToCart/"+userId+"/"+productId,true);
+              else
+                xhttp.open("GET","/cart/loadCarts/"+userId,true);
+
+              xhttp.send();
+              xhttp.onreadystatechange = function(){
+              if(xhttp.readyState == 4){
+                let data = JSON.parse(xhttp.responseText);
+                document.getElementById("totalcart").innerHTML=""+data.length;
+                for(let items of data){
+                  addToCart(items.id)
+                  
+                }
+              }
+            }
+          }
+
+
+            function addToCart(id){
+                console.log(id);
+              var element = document.getElementById("button-57"+id);
+              var a = document.getElementById("a"+id);
+              var spanf = document.getElementById("spanFirst"+id);
+              var spanl = document.getElementById("spanLast"+id);
+              element.style.backgroundColor="#046A38";
+              spanf.innerHTML="ADDED";
+              spanl.innerHTML="GO TO CART";
+              a.href = "/cart/goToCart/<%=currentUser.userId%>"
+              
+        }
+
+        function myFunction(id) {
+                var ele = document.getElementById(id);
+                ele.remove();
+                window.alert("remove_"+id)
+            }
+
+
+</script>

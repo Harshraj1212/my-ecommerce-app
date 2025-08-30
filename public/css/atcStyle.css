@@ -1,0 +1,439 @@
+.container1 {
+    /* background-image: url("bgi.jpg"); */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    /* background-position: center; */
+    padding: 0px 40px;
+    margin-bottom: 2%;
+    /* background-blend-mode: lighten; */
+    /* z-index: -1; */
+}
+
+.row1 {
+    /* border: 1px solid black; */
+
+
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px;
+   
+    width: 100%;
+    height: 80vh;
+    margin-top: 2%;
+    /* opacity: 0.5; */
+    /* position: fixed; */
+    
+}
+
+.col1 {
+    /* border: 1px solid rgb(255, 89, 0); */
+    padding: 4% 7%;
+    height: 100%;
+    overflow: auto;
+    /* line-height: %; */
+}
+
+.col2 {
+    border-left: 1px solid rgba(66, 65, 67, 0.612);
+    /* border-radius: 10px; */
+    /* margin-left: -40px; */
+    
+}
+.row2{
+    /* margin-top: 0%; */
+    font-weight: 600;
+    font-size: 80%;
+    color: rgb(66, 65, 65);
+    margin-bottom: 5%;
+    /* position: fixed; */
+    /* border: 1px solid rgb(43, 226, 67); */
+}
+.a {
+    /* border: 1px solid rgb(43, 226, 67); */
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+.thead{
+    font-weight: 600;
+    color: gray;
+   
+}
+.row3{
+    font-size : 25px;  ;
+    font-weight: 450;
+    /* border: 1px solid black; */
+    margin-top: 5%;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.200);
+    padding:0px 10px ;
+
+}
+.product{
+    max-height: 10vh;
+    text-align: center;
+    /* border: 1px solid rgb(43, 183, 226);  */
+    
+}
+
+.img{
+    width: 50%;
+    max-height: 7vh;
+
+}
+.title{
+    font-size:70% ;
+    margin-top: 1.5%;
+}
+.discount{
+    color: rgb(17, 211, 17);
+    font-weight: 500;
+}
+/* ----------------------Summary section--------------------- */
+
+.srow1{
+    box-shadow: 0px 2px 2px 0px gray;
+    font-family: 'Dancing Script', cursive;
+    /* border: 1px solid black; */
+    color: #249283;
+    text-align: center;
+    margin-top: 6%;
+}
+.scontainer1{
+    border: 1px solid rgb(44, 43, 43);
+    box-shadow: 1px 1px 3px gray;
+    margin-top: 10%;
+    height: 80%;
+    /* justify-content: left; */
+}
+.innerSummary{
+    padding-top: 15px;
+    /* border: 1px solid red; */
+    height: 80%;
+    line-height: 45px;
+    overflow: auto;
+}
+.z{
+    
+    font-weight: 700;
+    color:rgb(96, 111, 125);
+    /* text-shadow: 1px 1px 1px black; */
+}
+.sbtn{ 
+    margin-top: 5%;
+    /* position: relative; */
+    /* border: 2px solid red; */
+    /* padding-bottom: 50px; */
+    text-align: center;
+    border-radius: 25px;
+    width: 80%;
+    height: 20px;
+}
+.btnDiv{
+    margin-top: 20px;
+    text-align: center;
+}
+.sbtn1{
+    border-radius:8px;
+    width: 85%;
+    background-color: #3bc5b2;
+    border-style: none;
+    font-weight: 500;
+}
+.sbtn1:hover{
+    background-color: #249283;
+}
+
+.quanlity{
+    position: relative;
+}
+.qmin, .qplus{
+    /* margin-left: 20px; */
+    position: absolute;
+    border-style: none;
+    border-radius: 50%;
+    color: #18181a;
+    background-color: #fff;
+    font-size: 14px;
+    padding: 0px 0px;
+    width: 21px;
+    height: 21px;
+    box-shadow: 1px 1px 3px;
+}
+.qmin{
+    margin-left: -30px;
+}
+.qplus{
+    margin-left: 8px;
+
+}
+
+#tdis{
+    color: green;
+    font-weight: 450;
+}
+.save{
+    color: rgb(101, 100, 100);
+    text-decoration: line-through;
+    font-weight: 450;
+    font-size: 13px;
+}
+
+/* .....................modal..................... */
+.modalcont{
+    padding: 5% 10%;
+    height: 65vh;
+    /* border: 2px solid blue; */
+    overflow: auto;
+    /* box-shadow: 1px 0px 10px black; */
+  }
+  .allHead{
+    font-size: 13px;
+    color: rgba(7, 7, 7, 0.792);
+    font-weight: 650;
+}
+  
+  .alldiv{
+    margin-top: 10px;
+}
+.inputDiv{ 
+    line-height: 17px; 
+}
+
+.inputfield{
+    width: 100%;
+    border-style: none;
+    border-bottom:1px solid gray ;
+    font-size: 14px;
+    font-weight: 400;
+    padding:4px 1px ;
+}
+.inputfield:focus{
+    outline: none;
+}
+.m{
+    padding:10px ;
+    text-align: right;
+}
+.modal-footer{
+    border: none;
+    justify-content: center;
+}
+.orderSuccess{
+    text-align: center;
+}
+.size{
+    font-size: 16px;
+}
+.td{
+    color: green;
+    font-weight: 500;
+}
+.tdisPrice{
+    font-weight: 450;
+}
+.free{
+    color: green;
+}
+/* __________________dropdown____________________________________ */
+.dropdown-menu{
+  border: none;
+  padding: 0px;
+
+  font-size: 12px !important;
+  text-align: center;
+  background-color: silver;
+}
+/* ____________________orderview_________________________________ */
+
+.head {
+    /* padding: 0% 5%; */
+    font-family: 'Dancing Script', cursive;
+    border-bottom: 1px solid gray;
+    /* box-shadow: 0px 1px 0.5px black; */
+    text-align: center;
+    font-size: 35px;
+    color: #1aa694;;
+    /* text-shadow: 1px 1px 5px rgba(45, 20, 234, 0.829); */
+    padding-bottom: 8px;
+}
+
+.heading {
+    margin-top: 2%;
+    font-weight: 500;
+    /* box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.712); */
+    /* border: 1px solid rgb(17, 2, 230); */
+    /* text-align: center; */
+    padding: 5px;
+    color: rgba(14, 14, 14, 0.913);
+}
+
+.headingValue {
+    margin-top: 1%;
+    /* border: 1px solid rgb(49, 49, 50); */
+    /* text-align: center; */
+    padding: 6px;
+    font-size: 14px;
+    box-shadow: 0.5px 0.5px 0.5px rgba(48, 48, 48, 0.323);
+}
+
+.values {
+    /* border: 1px solid green; */
+    overflow: auto;
+    height: 58vh;
+    /* height: 75%; */
+    margin-top: 5px;
+}
+
+#viewOrders1 {
+    text-decoration: none;
+   
+}
+
+/* ------------------flip------------------- */
+
+.abc{
+    /* border: 1px solid yellow; */
+    /* float: left; */
+    height: 85vh;
+}
+.box001 {
+    height: 75vh;
+    width: 80%;
+    margin-top: 8vh;
+    /* border: 1px solid red; */
+    padding: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+.box001-content {
+    /* border: 2px solid rgb(0, 255, 145); */
+    height: 75vh;
+    padding: 0px;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    /* justify-content: center; */
+}
+
+/* .box:hover .box-content {
+    transform: rotateY(180deg);
+} */
+.outer {
+    height: 75vh;
+    /* width: 75%; */
+    box-shadow: 2px 2px 5px;
+    /* border: 1px solid black; */
+
+
+    padding: 1% 5%;
+
+}
+
+.outer1 {
+    position: absolute;
+    height: 75vh;
+    backface-visibility: hidden;
+    background-color: whitesmoke;
+    padding: 1% 3%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px;
+
+}
+
+.outer2 {
+    position: absolute;
+    backface-visibility: hidden;
+    height: 75vh;
+    /* width: 75%; */
+    box-shadow: 2px 2px 5px;
+    border-radius: 10px;
+    transform: rotateY(180deg);
+    padding: 1% 5%;
+    background-color: whitesmoke;
+}
+
+/* ..................orderDetails..................... */
+.overflow {
+    /* border: 3px solid yellow; */
+    overflow: auto;
+    overflow-x: hidden;
+    height: 63.5vh;
+    padding: 0px;
+}
+
+.a {
+    /* border: 1px solid rgb(43, 226, 67); */
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.row3 {
+    font-size: 85%;
+    font-weight: 450;
+    /* border: 1px solid black; */
+    justify-content: center;
+    margin-top: 1%;
+    /* max-width: 90%; */
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.200);
+    padding: 2px 0px;
+}
+
+.product {
+    max-height: 10vh;
+    text-align: center;
+    /* border: 1px solid rgb(43, 183, 226);  */
+
+}
+
+.img {
+    width: 30%;
+    max-height: 6vh;
+
+}
+
+.title {
+    font-size: 100%;
+    margin-top: 1.5%;
+}
+
+.discount {
+    color: rgb(17, 211, 17);
+    font-weight: 500;
+}
+
+#orderBtn {
+    margin-top: 5px;
+    
+    position: absolute;
+    text-align: left;
+    font-size: 25px;
+    color: rgba(4, 4, 3, 0.751);
+}
+
+#orderBtn :hover{
+    color: crimson;
+    
+}
+#viewOrders1{
+    color: #1aa694;;
+    cursor: pointer;
+}
+#viewOrders1:hover{
+    color: rgb(6, 125, 23);
+}
+.heading2{
+    margin: 2px;
+    /* width: 90%; */
+}
+
+.orderbtn{
+    color: blue;
+    cursor: pointer;
+}
+.money{
+    color: green;
+}

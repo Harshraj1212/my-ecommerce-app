@@ -1,0 +1,235 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewMore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.0/css/all.css" integrity="sha384-yXyaKVWGB2SyDoYATyErcgoNH1iAnnf8fCXejZM4NYUbhWiGkZoMwh6IoJ4v5ogi" crossorigin="anonymous">
+
+    <style>
+        #heading {
+            background-color: white;
+            /* margin-top: 1%; */
+            padding-top: 1%;
+            font-weight: bold;
+            color: #000;
+            box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+            text-shadow: 10px 10px 25px rgb(247, 16, 16),
+                -10px 10px 25px rgb(5, 250, 91),
+                -10px -10px 25px rgb(32, 11, 220),
+                10px -10px 25px rgb(215, 252, 5);
+            font-family: 'Times New Roman', Times, serif;
+            /* width: ; */
+            text-align: center;
+            /* border-bottom: 2px solid black; */
+            height: 12vh;
+            font-size: 30px
+        }
+
+        .outer1 {
+            margin-top: 2%;
+            padding: 20px;
+            /* box-shadow: 2px 2px 10px; */
+        }
+
+        .outer2 {
+            margin-top: 2%;
+            padding: 20px;
+            position: relative;
+
+        }
+
+        .box1 {
+
+            text-align: center;
+            /* border: 1px solid black; */
+            height: 60vh;
+            /* background-color: aquamarine; */
+            /* outline: 1px solid blue; */
+        }
+
+        .box2 {
+            /* border: 1px solid black; */
+            height: 60vh;
+        }
+
+        .box {
+            width: auto;
+            height: auto;
+        }
+
+        #img1 {
+            max-width: 100%;
+            height: 100%;
+            box-shadow: 2px 2px 10px;
+
+        }
+
+        .otherimg {
+            margin-top: 20px;
+        }
+
+        .abc {
+            border: 1px solid black;
+            text-align: center;
+            height: 15vh;
+            /* margin: 5%; */
+
+        }
+
+        .abc img {
+            position: relative;
+            border-radius: 20%;
+            max-height: 100%;
+            max-width: 100%;
+            padding: 5%;
+            /* border: 1px solid black; */
+        }
+
+        #price {
+
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #oprice {
+            color: gray;
+            /* vertical-align: middle; */
+            text-decoration: line-through
+        }
+
+        #discount {
+            color: rgb(13, 206, 58);
+        }
+
+        .price span {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+
+
+        #cart {
+            border-radius: 24px;
+            background-color: #2e913f;
+            color: #fff;
+            padding: 8px;
+            border-style: none;
+        }
+
+        .cart {
+            margin-top: 20px;
+        }
+
+        .outer2A {
+            margin-top: 2%;
+            position: absolute;
+        }
+
+        .zoom-preview {
+            position: absolute;
+            width: 95%;
+            height: 90%;
+            /* border: 2px solid red; */
+            border-radius: 5%;
+        }
+
+        .box2:hover .zoom-preview {
+            box-shadow: 2px 2px 15px black;
+
+        }
+        #title{
+            font-size: 30px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="heading"><span id="hcontent">Description</span></div>
+    <div class="container">
+        <div class="row">
+            <!-- ---------------outer1-------------------- -->
+            <div class="col-6 outer1">
+                <div class="row box1">
+                    <div class="col-12 box2">
+                        <img class="" src="<%= productView.thumbnail%>" id="img1" alt="">
+                    </div>
+                </div>
+                            <%const imgarr = productView.imageArray.split(" ")%>
+                <div class="row justify-content-between otherimg">
+                    <div onclick="myFunction1()" class="col-4 abc"><img class="" src="<%=imgarr[0]%>" id="img2" alt=""></div>
+                    <div onclick="myFunction2()" class="col-4 abc"><img class="" src="<%=imgarr[1]%>" id="img3" alt=""></div>
+                    <div onclick="myFunction3()" class="col-4 abc"><img class="" src="<%=imgarr[2]%>" id="img4" alt=""></div>
+                </div>
+            </div>
+            <!-- -----------------outer2------------------ -->
+            <div class="col-6 outer2">
+                <div class="outer2A">
+                    <div class="description">
+                        <div id="title"><%= productView.title %></div>
+                        <p id="description"><%= productView.description %></p>
+                    </div>
+                     <ul class="list-unstyled d-flex justify-content-between ratings">
+                        <li>
+                           <% if(productView.rating){
+                              var stars = productView.rating*1 / 1
+                           }
+                             if(productView.rating%1 >= 0.5){
+                                var halfstar = 1;
+                             }
+                           
+                           %>
+                           <%for(let i = 1 ; i<= stars ; i++){ %>
+
+                            <i class="text-warning fa fa-star"></i>
+                            <%}%>
+                            <%for(let i = 1 ; i<= halfstar ; i++){ %>
+
+                                <i class="text-warning fa fa-star-half"></i>
+                          <%}%>
+                            <!-- <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i>
+                            <i class="text-warning fa fa-star"></i> -->
+                        </li>
+                        <li class="text-muted text-right"><%=productView.rating%></li>
+                    </ul>
+                    <div class="price"><span id="price"><%var dprice = productView.price - productView.price*productView.discountPercentage/100 %>₹<%=Math.round(dprice)%></span><span id="oprice">₹<%= productView.price %></span><span id="discount"><%=productView.discountPercentage %>% Off</span>
+                    </div><br>
+                    <div class="cart"><button id="cart"><i class="fas fa-shopping-cart"></i> add to cart</button>
+                        <button id="cart"><i class="fa fa-bolt"></i> Buy Now</button>
+                    </div>
+                </div>
+                <div class="zoom-preview" style="background-image: none; background-size: 2872.6px 1660.6px; background-position: -2775.04px -1311px;"></div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function myFunction1() {
+            var element1 = document.getElementById("img1").src;
+            var element2 = document.getElementById("img2").src;
+
+            document.getElementById("img1").src = element2;
+            document.getElementById("img2").src = element1;
+
+        }
+        function myFunction2() {
+            var element1 = document.getElementById("img1").src;
+            var element3 = document.getElementById("img3").src;
+
+            document.getElementById("img1").src = element3;
+            document.getElementById("img3").src = element1;
+        }
+        function myFunction3() {
+            var element1 = document.getElementById("img1").src;
+            var element4 = document.getElementById("img4").src;
+
+            document.getElementById("img1").src = element4;
+            document.getElementById("img4").src = element1;
+        }
+    </script>
+
+
+</body></html>

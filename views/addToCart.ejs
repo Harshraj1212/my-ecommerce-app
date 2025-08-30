@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("_externalLink.ejs")%>
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&display=swap');
+</style>
+<body>
+
+    <!-- Start Top Nav -->
+    <%- include("_navbar.ejs")%>
+       
+    <div class="container-fluid">
+        <div class="container container1">
+            <div class="row row1">
+                <div class="col-8 col1" id="outerDiv">
+                    <div class="row row2">
+                        <div class="col-4 a thead">Product</div>
+                        <div class="col-2 a thead">Price</div>
+                        <div class="col-2 a thead">Discount</div>
+                        <div class="col-2 a thead">Quantity</div>
+                        <div class="col-2 a thead">Total</div>
+                    </div>
+                    
+                    <%cartItems.map((item,index)=>{%>
+
+                    <div class="row row3">
+                        <div class="col-4 a">
+                            <div class="product">
+                                <img class="img" id="img<%=index%>" src=<%=item.thumbnail%>>
+                                <h6 class="title" id="title"><%=item.title.substring(0,20)%></h6>
+                            </div>
+                        </div>
+                        <div class="col-2 a price" >
+                            <span class="symbol size">₹</span >
+                            <span class="size" id="price<%=index%>"><%=item.price%></span>
+                        </div>
+                        <div class="col-2 a discount" >
+                            <span class="size" id="discount<%=index%>"><%=Math.trunc(item.discountPercentage)%></span><span class="size">%Off</span>
+                        </div>
+                        <div class="col-2 a quanlity" id="quantity">
+                            <a class="btn btn-danger qmin"  id="qmin" onclick="changeQty('min','qty<%=index%>','<%=item.id%>','<%=item.stock%>')">-</a>
+                            <span class="qvalue size" id="qty<%=index%>">1</span>
+                            <a class="btn btn-success qplus"  id="qplus"  onclick="changeQty('plus','qty<%=index%>','<%=item.id%>','<%=item.stock%>')">+</a>
+                       </div>
+                        <div class="col-2 a" >
+                            <span class="size">₹</span>
+                            <span class="size" id="total<%=index%>">0</span>
+                        </div>
+                    </div>
+
+                    <%})%>
+                   
+                </div>
+
+                <!-- summary Section  -->
+                <div class="col-4 col2">
+                    <div class="container scontainer1">
+                        
+                        <div class="row srow1">
+                            <h2>Order Summary</h2>
+                        </div>
+                        <div class="container innerSummary">
+                            <span class="totalItem z">Total Item
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span>
+                            <span class="totalItemValue" id="titem">3</span><br>
+                            <span class="totalDiscount z">Total Discount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;</span>
+                            <span class="td">Save ₹</span><span class="td" id="tdiscount">3000</span><br>
+                            <span class="totalPrice z">Total Price
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span>
+                                <span class="tdisPrice">₹</span ><span class="totalPriceValue tdisPrice" id="tdisPrice">50000</span> <span class="save">₹</span ><span class="save" id="trealPrice">2000</span><br>
+                                <span class="totalDiscount z">Delivery Charges &nbsp; :&nbsp;&nbsp;&nbsp;</span>
+                                <span class="free">Free</span><br>
+                                
+                            <!-- <span class="z">Select a delivery method </span><br> -->
+                            <!-- <input type="checkbox" id="radio1" name="paymentMethod" value="cod"> -->
+                            <!--  <label for="radio1">This order contains a gift</label>&nbsp; -->
+                            <!-- <input type="radio" id="radio2" name="paymentMethod" value="upi"> -->
+                            <!--  <label for="radio2">UPI</label>&nbsp;<br> -->
+                            <div class="btnDiv"> <a class="btn btn-success sbtn1" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Check Out</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-------------------------- Modal -------------------------------------->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Shipping Address Details...</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <form action="/order/save" method="post">
+
+                        <div class="modal-body">
+                            <div class="con modalcont">
+                               
+                                <div class="inputDiv alldiv">
+                                    <label class="allHead">Name</label>
+                                    <input type="text" onblur="validation(this,id)" name="contactPerson" placeholder="Enter Full Name"
+                                        class="inputfield" id="name">
+                                    <label id="ename"></label>
+                                </div>
+                                <div class="inputDiv alldiv">
+                                    <label class="allHead">Email</label>
+                                    <input type="text" placeholder="Enter Email" name="contactEmail" class="inputfield" id="email">
+                                    <label id="eemail"></label>
+                                </div>
+                                <div class="inputDiv alldiv">
+                                    <label class="allHead">Mobile Number</label>
+                                    <input type="text" placeholder="Enter Mobile Number" name="contactNumber" class="inputfield"
+                                        id="password">
+                                    <label id="epassword"></label>
+                                </div>
+                               
+                                <div class="inputDiv alldiv">
+                                    <label class="allHead">Delivery Address</label>
+                                    <input type="text" placeholder="Enter Delivery Address" name="deliveryAddress" class="inputfield"
+                                        id="Daddress">
+                                    <label id="ecPassword"></label>
+                                </div>
+                                <div class="alldiv">
+                                <span class="z">Select a delivery method </span><br>
+                                <input type="radio" id="radio1" name="paymentMode" value="cod">
+                                 <label for="radio1">COD</label>&nbsp;
+                                <input type="radio" id="radio2" name="paymentMode" value="upi">
+                                 <label for="radio2">UPI</label>&nbsp;<br>
+                                <div class="inputDiv alldiv">
+                                    <input type="hidden" name="billAmount" id="totalBillAmount">
+                                </div>
+                                <script>
+                                    document.getElementById("radio2").disabled = true;
+                                </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                            <button  type="submit" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" class="btn btn-warning">PLACE ORDER</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ---------------------------------------modal2--------------------------------------- -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="m">
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body orderSuccess">
+                            <h5>Your Order Successfully Placed...</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---------------------------------------modals end--------------------------------------- -->
+
+        </div>
+    </div>
+
+        
+        <%- include("_footer.ejs")%>
+
+            <%- include("_externalScripts.ejs")%>
+
+            <script>
+                
+               
+                loadCart();
+
+
+                function changeQty(action,elementId,productId,stock){
+                    console.log("pi"+productId);
+                    var xhttp = new XMLHttpRequest();
+                    let qty = 0;
+                    if(action=="min")
+                     qty = 1 * document.getElementById(elementId).innerHTML-1; 
+                    else
+                     qty = 1 * document.getElementById(elementId).innerHTML+1; 
+                    
+                    if(qty>0 && qty<= 1*stock){
+                      xhttp.open("GET","/cart/addToCart/updateQty/"+qty+"/<%=currentUser.userId%>/"+productId,true);
+                      xhttp.send();
+                      xhttp.onreadystatechange = function(){
+                       if(xhttp.readyState == 4){
+                          let data = JSON.parse(xhttp.responseText);
+  
+                            console.log(data);
+                          
+                                loadCart();
+                        }
+                      }
+                    }
+                }
+                
+                function loadCart(){
+                    var xhttp = new XMLHttpRequest(); 
+                    xhttp.open("GET","/cart/getCart/<%=currentUser.userId%>",true);
+                    xhttp.send();
+                    xhttp.onreadystatechange = function(){
+                    if(xhttp.readyState == 4){
+                       let data = JSON.parse(xhttp.responseText);
+                       document.getElementById("totalcart").innerHTML=""+data.length;
+                      let tqty=0;
+                      let tprice=0;
+                      let tdiscount =0;
+                      let tdisPrice = 0;
+                      let price = 0;
+                      let discount = 0;
+                    data.map((item,index)=>{
+                      
+                       let qty = document.getElementById("qty"+index);
+                       let total = document.getElementById("total"+index);
+                    //    let price = document.getElementById("price"+index).innerHTML;
+                    //    __________________summary section___________________________
+                    '<%cartItems.map((item,index2)=>{%>'
+                     if(index == '<%=index2%>'){
+                       price = '<%=item.price%>' ;
+                       discount = '<%=Math.trunc(item.discountPercentage)%>'
+                     } 
+                    '<%})%>'
+                       tqty += 1*item.productQty;
+                       tprice += 1*price*item.productQty;
+                       console.log(tprice)
+                       tdiscount += (Math.trunc((price * discount)/100))* item.productQty ;
+                       tdisPrice +=  (price - Math.trunc((price * discount)/100))* item.productQty ;
+                    
+                       qty.innerHTML = ""+item.productQty;
+                       total.innerHTML = (price - Math.trunc((price * discount)/100))* item.productQty ;
+                       
+                    }     
+                    );
+                     document.getElementById("titem").innerHTML= ""+tqty;
+                     document.getElementById("tdiscount").innerHTML= ""+tdiscount;
+                     document.getElementById("tdisPrice").innerHTML= ""+tdisPrice;
+                     document.getElementById("trealPrice").innerHTML= ""+tprice;
+                     document.getElementById("totalBillAmount").value= ""+tdisPrice;
+                }
+            }
+        }
+
+
+
+
+
+//                 console.log('<%=currentUser.userId%>');
+//             loadCarts('<%=currentUser.userId%>');
+//                 function loadCarts(userId){
+//                     var xhttp = new XMLHttpRequest(); 
+//                     xhttp.open("GET","/cart/loadCarts/"+userId,true);
+//                     xhttp.send();
+//                     xhttp.onreadystatechange = function(){
+//                     if(xhttp.readyState == 4){
+//                        let data = JSON.parse(xhttp.responseText);
+//                        var i=0;
+//                        var  totalPrice=0;
+//                        var  totalDiscount=0;
+//                        var  totalItem= data.length;
+//                     for(let a of data){
+
+                        
+// // -----------------------------------------------------------------------------
+
+        
+                   
+//                     let outerDiv = document.getElementById("outerDiv");
+//                     let row = document.createElement('div');
+//                     let col = document.createElement('div');
+//                     let product = document.createElement('div');
+//                     let img = document.createElement('img');
+//                     let h6 = document.createElement('h6');
+//                     let priceDiv = document.createElement('div');
+//                     let $price = document.createElement('span');
+//                     let price = document.createElement('span');
+//                     let discountDiv = document.createElement('div');
+//                     let $discount = document.createElement('span');
+//                     let discount = document.createElement('span');
+//                     let quanlity = document.createElement('div');
+//                     let quanlityMin = document.createElement('a');
+//                     let quanlityValue = document.createElement('span');
+//                     let quanlityplus = document.createElement('a');
+//                     let totalDiv = document.createElement('div');
+//                     let $total = document.createElement('span');
+//                     let total = document.createElement('span');
+//                     // ---------------class--------------------
+//                     row.className = 'row row3';
+//                     col.className = 'col-4 a';
+//                     product.className = 'product';
+//                     img.className = 'img';
+//                     h6.className = 'title';
+//                     priceDiv.className = 'col-2 a';
+//                     $price.className = 'symbol';
+//                     price.className = 'price';
+//                     discountDiv.className = 'col-2 a discount';
+//                     quanlity.className = 'col-2 a quanlity';
+//                     quanlityMin.className = 'btn btn-danger qmin';
+//                     quanlityValue.className = 'qvalue';
+//                     quanlityplus.className = 'btn btn-success qplus';
+//                     totalDiv.className = 'col-2 a';
+//                     // ---------------id--------------------            
+//                     img.id = 'img';
+//                     img.src = a.thumbnail;
+//                     h6.id = 'title';
+//                     price.id = 'price';
+//                     discount.id = 'discount';
+//                     quanlity.id = 'quantity';
+//                     quanlityMin.id = 'qmin' + i;
+//                     quanlityValue.id = 'qvalue' + i;
+//                     quanlityplus.id = 'qplus' + i;
+//                     total.id = 'col-2 a';
+//                     // ---------------innerHTML--------------
+//                     h6.innerHTML = (a.title).substring(0, 23);
+//                     $price.innerHTML = "₹";
+//                     price.innerHTML = "" + a.price;
+//                     var dis = 1 * a.discountPercentage.toFixed(1);
+        
+//                     discount.innerHTML = dis;
+//                     $discount.innerHTML = "% Off";
+//                     quanlityValue.innerHTML = "1";
+//                     quanlityMin.innerHTML = "-";
+//                     quanlityplus.innerHTML = "+";
+//                     var tot = 1 * a.price - Math.trunc(a.price * dis / 100);
+//                     $total.innerHTML = "₹";
+//                     total.innerHTML = tot;
+        
+//                     totalPrice += a.price;
+//                     totalDiscount += Math.trunc(1 * a.price * dis / 100);
+//                     //--------------------Function------------------------- 
+        
+//                     quanlityMin.onclick =
+//                         function myFunMin() {
+//                             let vdiscount = 1 * discount.innerHTML;
+//                             let vprice = 1 * price.innerHTML;
+//                             let afterDisPrice = vprice - Math.trunc(vprice * vdiscount / 100);
+//                             let vvalue = 1 * quanlityValue.innerHTML - 1;
+//                             if (vvalue > 0) {
+//                                 quanlityValue.innerHTML = vvalue;
+//                                 total.innerHTML = vvalue * afterDisPrice;
+//                                 totalDiscount -= Math.trunc(vprice * vdiscount / 100);;
+//                                 totalPrice -= vprice;
+//                                 totalItem--;
+//                                 funSummary();
+        
+//                             }
+//                         };
+//                     quanlityplus.onclick =
+//                         function myFunPlus() {
+//                             let vdiscount = 1 * discount.innerHTML;
+//                             let vprice = 1 * price.innerHTML;
+//                             let afterDisPrice = vprice - Math.trunc(vprice * vdiscount / 100);
+//                             let vvalue = 1 * quanlityValue.innerHTML + 1;
+//                           if(vvalue<=a.stock){
+//                             quanlityValue.innerHTML = vvalue;
+//                             total.innerHTML = vvalue * afterDisPrice;
+//                             totalDiscount += Math.trunc(vprice * vdiscount / 100);;
+//                             totalPrice += vprice;
+//                             totalItem++;
+//                             funSummary();
+//                           }
+        
+//                         };
+        
+//                     product.appendChild(img);
+//                     product.appendChild(h6);
+//                     col.appendChild(product);
+//                     row.appendChild(col);
+//                     priceDiv.appendChild($price);
+//                     priceDiv.appendChild(price);
+//                     row.appendChild(priceDiv);
+//                     discountDiv.appendChild(discount);
+//                     discountDiv.appendChild($discount);
+//                     row.appendChild(discountDiv);
+//                     quanlity.appendChild(quanlityMin);
+//                     quanlity.appendChild(quanlityValue);
+//                     quanlity.appendChild(quanlityplus);
+//                     row.appendChild(quanlity);
+//                     totalDiv.appendChild($total);
+//                     totalDiv.appendChild(total);
+//                     row.appendChild(totalDiv);
+//                     outerDiv.appendChild(row);
+//         i++;
+//                 }
+//                 funSummary();
+//                 function funSummary() {
+//                     var titem = document.getElementById("titem");
+//                     var tdis = document.getElementById("tdis");
+//                     var tprice = document.getElementById("tprice");
+//                     var save = document.getElementById("save");
+//                     titem.innerHTML = totalItem;
+//                     tdis.innerHTML = "Save ₹" + totalDiscount;
+//                     tprice.innerHTML = "₹" + (totalPrice - totalDiscount) + " ";
+//                     save.innerHTML = "₹" + totalPrice;
+                    
+                
+//                 }
+        
+                // function funOrder() {
+                //     var d = new Date();
+                //     var date = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                //     var totalP = document.getElementById("tprice").innerHTML;
+                //     let shipto = document.getElementById('Daddress').value;
+                //     var jsonObj = {
+                //         "date": date,
+                //         "totalPrice": totalP,
+                //         "deliveryAddress": shipto,
+                //         "products": orderObj,
+        
+                //     };
+        
+                //     // alert(jsonObj.products);
+                //     localStorage.setItem("order" + 4, JSON.stringify(jsonObj));
+                //     // localStorage.setItem("order" + (++orderCount), JSON.stringify(jsonObj));
+                //     // localStorage.setItem("index"+orderCount, "" + orderIndex );
+                //     localStorage.setItem("totalOrder", "" + (orderCount));
+        
+                //     // localStorage.setItem("totalOrder", "" + 0);
+                //     // alert(orderCount);
+                // }
+
+// -----------------------------------------------------------------------------
+                      
+                
+    //         }
+    //     }
+    // }
+             
+             
+            </script>
+       
+</body>
+
+</html>
