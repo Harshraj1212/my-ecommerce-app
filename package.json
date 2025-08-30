@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon -r dotenv/config server.js"
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
