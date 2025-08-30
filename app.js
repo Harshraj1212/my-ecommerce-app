@@ -45,6 +45,18 @@ app.use("/cart", cartRoute);
 app.use("/order", orderRoute);
 app.use("/product", productRoute);
 
+pool.getConnection((err, connection) => {
+  if (err) {
+    console.error('Database connection failed:', err.message);
+    if (err.code === 'ECONNREFUSED') {
+      console.error('Check your database connection variables!');
+    }
+  } else {
+    console.log('Database connected successfully');
+    connection.release();
+  }
+});
+
 // Make port dynamic for deployment
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
