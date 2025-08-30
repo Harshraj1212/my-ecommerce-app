@@ -14,7 +14,9 @@ import indexRoute from "./routes/index.route.js";
 import cartRoute from "./routes/cart.route.js";
 import orderRoute from "./routes/order.route.js";
 import productRoute from "./routes/product.route.js";
+import contactRouter from "./routes/contact.route.js";
 import mysqlSessionImport from "express-mysql-session";
+import contactRoutes from './routes/contact.route.js';
 import pool from "./db/dbConfig.js"; // This should now work
 
 const MySQLStore = mysqlSessionImport(session);
@@ -45,6 +47,8 @@ app.use("/", indexRoute);
 app.use("/cart", cartRoute);
 app.use("/order", orderRoute);
 app.use("/product", productRoute);
+app.use("/contact", contactRouter);
+app.use(contactRoutes);
 
 // Test connection
 pool.getConnection((err, connection) => {

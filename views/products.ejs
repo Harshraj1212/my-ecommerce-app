@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("_externalLink.ejs") %>
+</head>
+
+<body>
+    <%- include("_navbar.ejs") %>
+
+    <!-- Start Featured Products -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Products</h1>
+                    <p>Check out our latest products available in the store.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-between px-3">
+                <% products.forEach(product => { %>
+                    <div id="<%= product.id %>" class="col-3 card mb-5 mx-2 px-0 py-0 box" style="width: 14rem;">
+                        <div class="rotate">
+                            <div class="box-content bts1">
+                                <div class="box-front">
+                                    <img src="<%= product.thumbnail %>" class="card-img-top imgzoom" style="height:30vh" alt="<%= product.title %>">
+                                </div>
+                                <div class="box-back">
+                                    <p><%= product.description.substring(0, 45) %></p>
+                                    <a href="/viewmore/<%= product.id %>">View More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between ratings">
+                                <li>
+                                    <% if(product.rating){
+                                        var stars = Math.floor(product.rating);
+                                        var halfstar = (product.rating % 1) >= 0.5 ? 1 : 0;
+                                    } %>
+                                    <% for(let i = 1; i <= stars; i++){ %>
+                                        <i class="text-warning fa fa-star"></i>
+                                    <% } %>
+                                    <% for(let i = 1; i <= halfstar; i++){ %>
+                                        <i class="text-warning fa fa-star-half"></i>
+                                    <% } %>
+                                </li>
+                                <li class="text-muted text-right"><%= product.rating %></li>
+                            </ul>
+
+                            <h6 class="card-title"><%= product.title %></h6>
+                            <p class="card-text">₹<%= product.price %></p>
+
+                            <% if(currentUser.userId){ %>
+                                <a onclick="addToCarts('<%= currentUser.userId %>','<%= product.id %>')" id="a<%= product.id %>">
+                                    <button class="button-57" id="button-57<%= product.id %>" role="button">
+                                        <span id="spanFirst<%= product.id %>" class="text"><i class="fas fa-shopping-cart"></i> ADD TO CART</span>
+                                        <span id="spanLast<%= product.id %>"><i class="fas fa-shopping-cart"></i> CART</span>
+                                    </button>
+                                </a>
+                            <% } else { %>
+                                <a href='/signin'>
+                                    <button class="button-57" role="button"><span class="text"><i class="fas fa-shopping-cart"></i> ADD TO CART</span></button>
+                                </a>
+                            <% } %>
+                        </div>
+
+                        <div class="cross">
+                            <a onclick="myFunction('<%= product.id %>')" class="btn btn-danger bt2">✘</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+    <!-- End Featured Products -->
+
+    <%- include("_footer.ejs") %>
+    <%- include("_externalScripts.ejs") %>
+
+    <script>
+        function myFunction(id) {
+            var ele = document.getElementById(id);
+            ele.remove();
+        }
+    </script>
+</body>
+</html>

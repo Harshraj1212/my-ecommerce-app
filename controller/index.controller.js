@@ -9,31 +9,27 @@ export const indexPage = (request, response, next) => {
 
 
     const options = {
-      method: 'GET',
-      url: 'https://distance-calculator.p.rapidapi.com/distance/simple',
-      params: {
-        lat_1: '47.373535',
-        long_1: '8.541109',
-        lat_2: '42.335321',
-        long_2: '-71.023516',
-        unit: 'miles',
-        decimal_places: '2'
-      },
+        method: 'GET',
+        url: 'https://driving-distance-calculator-between-two-points.p.rapidapi.com/data',
+        params: {
+            origin: 'Zurich, Switzerland',
+            destination: 'Boston, MA'
+        },
       headers: {
-        'Content-Type': 'application/json',
-        'X-RapidAPI-Key': ' fb2b018e5dmsh0487dd610440df4p1ebfa7jsnc5f70364e69e',
-        'X-RapidAPI-Host': 'driving-distance-calculator-between-two-points.p.rapidapi.com'
-      }
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+            'X-RapidAPI-Host': 'driving-distance-calculator-between-two-points.p.rapidapi.com'
+        }
     };
-    
+
     axios.request(options).then(function (response) {
         console.log(response.data);
     }).catch(function (error) {
         console.error(error);
     });
 
-    if(! request.session.user)
-       request.session.user={userId:null}
+    if (!request.session.user)
+        request.session.user = { userId: null }
     Product.fetch()
         .then(result => {
             return response.render("index.ejs", {
@@ -109,6 +105,10 @@ export const signout = (request, response, next) => {
     return response.redirect("/");
 }
 
+export const contactPage = (req, res, next) => {
+    if(!req.session.user) req.session.user = { userId: null };
+    return res.render("contact.ejs", { currentUser: req.session.user });
+}
 
 export const viewmore = (request, response, next) => {
 
